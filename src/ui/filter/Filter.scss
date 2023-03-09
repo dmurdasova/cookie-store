@@ -1,0 +1,12 @@
+$unit: 8px;
+$white: #fff;
+$gray: #d9d9d9;
+
+@media screen and (min-width: 480px) {
+    .filter {
+        border-radius: $unit;
+        background-color: $white;
+        padding: calc($unit * 2);
+        border: 1px solid $gray;
+    }
+}

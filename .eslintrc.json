@@ -7,7 +7,7 @@
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
-        "react-hooks"
+        "plugin:react-hooks/recommended"
     ],
     "overrides": [],
     "parser": "@typescript-eslint/parser",
