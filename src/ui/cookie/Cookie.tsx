@@ -22,7 +22,7 @@ export function Cookie({ item }: ICookieProps): JSX.Element {
                 )}
                 <div className="cookie-body__footer">
                     <p>
-                        Price: <b>{item.price}</b>
+                        Price: <b>{item.price / 100}</b>
                     </p>
                     <p>
                         Rating: <b>{item.rating ?? 0}</b>

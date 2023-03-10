@@ -2,7 +2,7 @@ import { Layout } from 'antd';
 import { useCallback, useState } from 'react';
 import { ICookie } from '../domain/entities';
 import { DEFAULT_COOKIE_FILTER, ICookieFilter } from '../domain/ports';
-import { useGetCookies, useGetToppings, useWidthWatcher } from '../secondary';
+import { useGetCookies, useGetToppings } from '../secondary';
 import './App.scss';
 import { Cookie } from './cookie/Cookie';
 import { Filter } from './filter/Filter';
@@ -16,7 +16,7 @@ function App() {
     const toppings = useGetToppings();
 
     const handleFilterChange = useCallback((f: ICookieFilter | null) => {
-        setFilter(f || DEFAULT_COOKIE_FILTER);
+        setFilter(f ?? structuredClone(DEFAULT_COOKIE_FILTER));
     }, []);
 
     return (
