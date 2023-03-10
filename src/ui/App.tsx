@@ -19,8 +19,6 @@ function App() {
     const loadToppings = useGetToppings();
 
     useEffect(() => {
-        console.log('effect getting cookies');
-
         const fetchData = async () => {
             const data = await loadCookies(filter);
             setCookies(data);

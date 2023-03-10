@@ -8,8 +8,6 @@ export function useGetToppings(): () => Promise<readonly ITopping[]> {
     const repository = useToppingRepositoryService();
     const notificationService = useNotificationService();
 
-    console.log('useGetToppings');
-
     const callback = useCallback(() => {
         return getToppingsUseCase({ repository, notificationService });
     }, [repository, notificationService]);

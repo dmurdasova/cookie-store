@@ -9,8 +9,6 @@ export function useGetCookies(): (filter: ICookieFilter) => Promise<readonly ICo
     const repository = useCookieRepositoryService();
     const notificationService = useNotificationService();
 
-    console.log('useGetCookies');
-
     const callback = useCallback(
         (filter: ICookieFilter) => {
             return getCookiesUseCase(filter, { repository, notificationService });

@@ -33,7 +33,7 @@ export function Filter(props: IFliterProps): JSX.Element {
 
     const buttonsWidth = { width: isMoblie ? '100%' : 'auto' };
 
-    // TODO: сброс не работает с группами
+    // TODO: сброс не работает с группами + надо для мобилки сделать норм группи
     const toppingOptions: CheckboxOptionType[] = useMemo(() => {
         return toppings.map((t) => ({ label: t.name, value: t.id } as CheckboxOptionType));
     }, [toppings]);
