@@ -1,7 +1,7 @@
 import { Layout } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCallback, useState } from 'react';
-import { ICookie } from '../domain/entities';
+import { ICookie, ITopping } from '../domain/entities';
 import { DEFAULT_COOKIE_FILTER, ICookieFilter } from '../domain/ports';
 import { useGetCookies, useGetToppings } from '../secondary';
 import './App.scss';
@@ -12,9 +12,31 @@ const { Header, Content, Footer } = Layout;
 
 function App() {
     const [filter, setFilter] = useState<ICookieFilter>(DEFAULT_COOKIE_FILTER);
+    const [cookies, setCookies] = useState<readonly ICookie[]>([]);
+    const [toppings, setToppings] = useState<readonly ITopping[]>([]);
 
-    const cookies = useGetCookies(filter);
-    const toppings = useGetToppings();
+    const loadCookies = useGetCookies();
+    const loadToppings = useGetToppings();
+
+    useEffect(() => {
+        console.log('effect getting cookies');
+
+        const fetchData = async () => {
+            const data = await loadCookies(filter);
+            setCookies(data);
+        };
+
+        fetchData();
+    }, [filter, loadCookies]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await loadToppings();
+            setToppings(data);
+        };
+
+        fetchData();
+    }, [loadToppings]);
 
     const handleFilterChange = useCallback((f: ICookieFilter | null) => {
         setFilter(f ?? structuredClone(DEFAULT_COOKIE_FILTER));

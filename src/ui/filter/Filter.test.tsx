@@ -10,7 +10,7 @@ const filterMock: ICookieFilter = {
     term: 'Term',
     selectedToppings: [1],
     sortType: 'none',
-    sortOrder: 'descending'
+    sortOrder: 'desc'
 };
 
 describe('Renders Filter component', () => {

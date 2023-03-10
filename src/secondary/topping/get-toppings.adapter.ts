@@ -1,26 +1,18 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { ITopping } from 'src/domain/entities';
 import { getToppingsUseCase } from '../../primary';
 import { useNotificationService } from '../notification/notification-service.adapter';
 import { useToppingRepositoryService } from './topping-repository.adapter';
 
-export function useGetToppings(): readonly ITopping[] {
+export function useGetToppings(): () => Promise<readonly ITopping[]> {
     const repository = useToppingRepositoryService();
     const notificationService = useNotificationService();
 
-    const [toppings, setToppings] = useState<readonly ITopping[]>([]);
+    console.log('useGetToppings');
 
-    useEffect(() => {
-        console.log('use effect toppings');
-
-        const fetchData = async (): Promise<void> => {
-            // TODO: Instead, we can use DI containers
-            const data = await getToppingsUseCase({ repository, notificationService });
-            setToppings(data);
-        };
-
-        fetchData();
+    const callback = useCallback(() => {
+        return getToppingsUseCase({ repository, notificationService });
     }, [repository, notificationService]);
 
-    return toppings;
+    return callback;
 }

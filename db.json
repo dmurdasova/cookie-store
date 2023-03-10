@@ -47,20 +47,21 @@
         {
             "id": 4,
             "title": "Coconut cookie",
-            "description": "Tasty and sweet - like you are on the Hawaii",
+            "description": "Tasty and sweet",
             "toppings": [3],
             "price": 100,
             "rating": 4.8
         },
         {
             "id": 5,
-            "title": "Chocolate and marshmallows cookie",
+            "title": "Chocolate-marshmallow",
+            "description": "Incredibly tasty!",
             "toppings": [1, 4],
             "price": 160,
             "rating": 3.6
         },
         {
-            "id": 7,
+            "id": 6,
             "title": "MM's cookie",
             "price": 90,
             "rating": 4.3

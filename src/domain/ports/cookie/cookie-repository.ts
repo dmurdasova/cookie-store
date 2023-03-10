@@ -1,7 +1,7 @@
 import { ICookie } from '../../entities';
 
 export type SortType = 'none' | 'price' | 'rating';
-export type SortOrder = 'descending' | 'ascending';
+export type SortOrder = 'desc' | 'asc';
 export type PriceRange = {
     from: number | null;
     to: number | null;
@@ -18,7 +18,7 @@ export interface ICookieFilter {
 export const DEFAULT_COOKIE_FILTER: ICookieFilter = {
     selectedToppings: [],
     sortType: 'none',
-    sortOrder: 'descending'
+    sortOrder: 'desc'
 };
 
 export interface ICookieRepository {

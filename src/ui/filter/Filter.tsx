@@ -24,8 +24,6 @@ export function Filter(props: IFliterProps): JSX.Element {
     const [currentFilter, setCurrentFilter] = useState<ICookieFilter>({} as ICookieFilter);
     const [selectedButton, setSelectedButton] = useState<string | null>(null);
 
-    // console.log(currentFilter);
-
     useEffect(() => {
         setCurrentFilter(filter);
     }, [filter]);
@@ -92,21 +90,21 @@ export function Filter(props: IFliterProps): JSX.Element {
                     <Button
                         itemID="price-high-low"
                         type={selectedButton === 'price-high-low' ? 'primary' : 'default'}
-                        onClick={() => handleQuickFilter('price-high-low', 'price', 'descending')}
+                        onClick={() => handleQuickFilter('price-high-low', 'price', 'desc')}
                         style={buttonsWidth}>
                         Price: high to low
                     </Button>
                     <Button
                         itemID="price-low-high"
                         type={selectedButton === 'price-low-high' ? 'primary' : 'default'}
-                        onClick={() => handleQuickFilter('price-low-high', 'price', 'ascending')}
+                        onClick={() => handleQuickFilter('price-low-high', 'price', 'asc')}
                         style={buttonsWidth}>
                         Price: low to high
                     </Button>
                     <Button
                         itemID="rating"
                         type={selectedButton === 'rating' ? 'primary' : 'default'}
-                        onClick={() => handleQuickFilter('rating', 'rating', 'descending')}
+                        onClick={() => handleQuickFilter('rating', 'rating', 'desc')}
                         style={buttonsWidth}>
                         Popular first
                     </Button>
@@ -123,6 +121,7 @@ export function Filter(props: IFliterProps): JSX.Element {
             <Form.Item>
                 <Space direction={isMoblie ? 'vertical' : 'horizontal'} style={{ width: '100%' }}>
                     <Button
+                        tabIndex={1}
                         style={buttonsWidth}
                         type="primary"
                         icon={<SearchOutlined />}

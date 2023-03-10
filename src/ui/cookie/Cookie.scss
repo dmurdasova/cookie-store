@@ -1,8 +1,11 @@
-$width: 250px;
+$body-width: 250px;
+$width: 300px;
 
 .cookie-card {
     display: flex;
     flex-direction: column;
+    width: $width;
+    max-width: $width;
 
     .ant-card-body {
         display: flex;
@@ -14,8 +17,8 @@ $width: 250px;
     display: flex;
     flex-direction: column;
     flex: 1 1 100%;
-    min-width: $width;
-    width: $width;
+    min-width: $body-width;
+    width: $body-width;
 
     p {
         padding: 0;
