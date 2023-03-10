@@ -28,8 +28,6 @@ describe('Get toppings use case', () => {
         };
     });
 
-    beforeEach(() => {});
-
     test('should return the array of toppings', async () => {
         const service = jest.spyOn(repository, 'get');
         const data = await getToppingsUseCase({ repository, notificationService });

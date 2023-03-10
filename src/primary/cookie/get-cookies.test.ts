@@ -37,8 +37,6 @@ describe('Get cookies use case', () => {
         };
     });
 
-    beforeEach(() => {});
-
     test('should return the array of cookies', async () => {
         const service = jest.spyOn(repository, 'get');
         const data = await getCookiesUseCase(filter, { repository, notificationService });

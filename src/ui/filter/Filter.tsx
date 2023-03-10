@@ -24,7 +24,7 @@ export function Filter(props: IFliterProps): JSX.Element {
     const [currentFilter, setCurrentFilter] = useState<ICookieFilter>({} as ICookieFilter);
     const [selectedButton, setSelectedButton] = useState<string | null>(null);
 
-    console.log(currentFilter);
+    // console.log(currentFilter);
 
     useEffect(() => {
         setCurrentFilter(filter);
@@ -35,6 +35,7 @@ export function Filter(props: IFliterProps): JSX.Element {
 
     const buttonsWidth = { width: isMoblie ? '100%' : 'auto' };
 
+    // TODO: сброс не работает с группами
     const toppingOptions: CheckboxOptionType[] = useMemo(() => {
         return toppings.map((t) => ({ label: t.name, value: t.id } as CheckboxOptionType));
     }, [toppings]);

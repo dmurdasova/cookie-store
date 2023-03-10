@@ -13,15 +13,6 @@ const mock: ICookie = {
 
 describe('Renders Cookie component', () => {
     beforeAll(() => {
-        // Object.defineProperty(window, 'matchMedia', {
-        //     value: jest.fn(() => {
-        //         return {
-        //             matches: true,
-        //             addListener: jest.fn(),
-        //             removeListener: jest.fn()
-        //         };
-        //     })
-        // });
         global.matchMedia =
             global.matchMedia ||
             function () {
@@ -35,7 +26,20 @@ describe('Renders Cookie component', () => {
     test('with mock values', () => {
         render(<Cookie item={mock} />);
         const title = screen.getByText(mock.title);
+        const description = screen.getByText(mock.description!);
+        const price = screen.getByText(mock.price / 100);
+        const rating = screen.getByText(mock.rating!);
+
         expect(title).toBeInTheDocument();
         expect(title.textContent?.trim()).toBe(mock.title);
+
+        expect(description).toBeInTheDocument();
+        expect(description.textContent?.trim()).toBe(mock.description);
+
+        expect(price).toBeInTheDocument();
+        expect(price.textContent?.trim()).toBe((mock.price / 100).toString());
+
+        expect(rating).toBeInTheDocument();
+        expect(rating.textContent?.trim()).toBe(mock.rating?.toString());
     });
 });

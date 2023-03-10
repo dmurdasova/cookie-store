@@ -1,4 +1,5 @@
 import { Layout } from 'antd';
+import React from 'react';
 import { useCallback, useState } from 'react';
 import { ICookie } from '../domain/entities';
 import { DEFAULT_COOKIE_FILTER, ICookieFilter } from '../domain/ports';
