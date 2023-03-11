@@ -22,7 +22,7 @@ describe('Get toppings use case', () => {
         };
 
         notificationService = {
-            notify(_message, _type): void {
+            notify(): void {
                 return;
             }
         };

@@ -25,13 +25,13 @@ describe('Get cookies use case', () => {
         ];
 
         repository = {
-            get(_filter): Promise<readonly ICookie[]> {
+            get(): Promise<readonly ICookie[]> {
                 return Promise.resolve(mocks);
             }
         };
 
         notificationService = {
-            notify(_message, _type): void {
+            notify(): void {
                 return;
             }
         };

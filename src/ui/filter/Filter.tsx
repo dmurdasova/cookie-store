@@ -1,7 +1,6 @@
 import { SearchOutlined, DeleteOutlined } from '@ant-design/icons';
-import { Button, Checkbox, CheckboxOptionType, Collapse, Form, Input, Space } from 'antd';
-import { CheckboxValueType } from 'antd/es/checkbox/Group';
-import { ChangeEvent, useEffect, useMemo, useState } from 'react';
+import { Button, Checkbox, Collapse, Form, Input, Space } from 'antd';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { ITopping } from 'src/domain/entities';
 import { ICookieFilter, SortOrder, SortType } from 'src/domain/ports';
 import { useWidthWatcher } from 'src/secondary';
@@ -33,11 +32,6 @@ export function Filter(props: IFliterProps): JSX.Element {
 
     const buttonsWidth = { width: isMoblie ? '100%' : 'auto' };
 
-    // TODO: сброс не работает с группами + надо для мобилки сделать норм группи
-    const toppingOptions: CheckboxOptionType[] = useMemo(() => {
-        return toppings.map((t) => ({ label: t.name, value: t.id } as CheckboxOptionType));
-    }, [toppings]);
-
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const {
             target: { value }
@@ -47,10 +41,17 @@ export function Filter(props: IFliterProps): JSX.Element {
         setCurrentFilter(updated);
     };
 
-    const handleCheckboxChanges = (checkedValues: CheckboxValueType[]): void => {
-        const selectedToppings = structuredClone(checkedValues) as number[];
-        const updated: ICookieFilter = { ...currentFilter, selectedToppings };
-        setCurrentFilter(updated);
+    const handleCheckboxChange = (id: number): void => {
+        let selectedToppings: number[];
+        const alreadyInSelected = currentFilter.selectedToppings.indexOf(id) !== -1;
+
+        if (alreadyInSelected) {
+            selectedToppings = currentFilter.selectedToppings.filter((x) => x !== id);
+        } else {
+            selectedToppings = currentFilter.selectedToppings.concat(id);
+        }
+
+        setCurrentFilter({ ...currentFilter, selectedToppings });
     };
 
     const handleQuickFilter = (selectedButton: string, type: SortType, order?: SortOrder): void => {
@@ -112,10 +113,20 @@ export function Filter(props: IFliterProps): JSX.Element {
             </Form.Item>
 
             <Form.Item label="Toppings" name="toppingValues">
-                <Checkbox.Group
-                    value={currentFilter.selectedToppings}
-                    options={toppingOptions}
-                    onChange={handleCheckboxChanges}></Checkbox.Group>
+                <Space>
+                    {toppings.map((topping) => {
+                        const checked = !!currentFilter.selectedToppings.find((x) => x === topping.id);
+                        return (
+                            <Checkbox
+                                key={topping.id}
+                                value={topping.id}
+                                checked={checked}
+                                onClick={() => handleCheckboxChange(topping.id)}>
+                                {topping.name}
+                            </Checkbox>
+                        );
+                    })}
+                </Space>
             </Form.Item>
 
             <Form.Item>
