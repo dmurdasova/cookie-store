@@ -1,4 +1,4 @@
-import { Layout } from 'antd';
+import { FloatButton, Layout } from 'antd';
 import React, { useEffect } from 'react';
 import { useCallback, useState } from 'react';
 import { ICookie, ITopping } from '../domain/entities';
@@ -57,6 +57,9 @@ function App() {
                     ))}
                 </div>
             </Content>
+
+            <FloatButton.BackTop />
+
             <Footer style={{ textAlign: 'center' }}>Cookie Store ©2023 Created by Diana Murdasova</Footer>
         </Layout>
     );

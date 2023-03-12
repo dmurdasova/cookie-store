@@ -35,7 +35,7 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "start_db": "json-server --watch db.json -p 3001",
+        "start_db": "json-server --watch db.json -H 0.0.0.0 -p 8090",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",

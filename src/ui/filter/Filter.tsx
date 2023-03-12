@@ -115,7 +115,7 @@ export function Filter(props: IFliterProps): JSX.Element {
             </Form.Item>
 
             <Form.Item label="Toppings" name="toppingValues">
-                <Space>
+                <Space className="filter_checkbox_container">
                     {toppings.map((topping) => {
                         const checked = !!currentFilter.selectedToppings.find((x) => x === topping.id);
                         return (
