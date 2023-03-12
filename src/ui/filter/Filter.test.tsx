@@ -1,10 +1,14 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { ICookieFilter } from 'src/domain/ports';
 import { Filter } from './Filter';
 import { ITopping } from 'src/domain/entities';
 
-const toppingsMock: ITopping[] = [{ id: 1, name: 'Coconut' }];
+const toppingsMock: ITopping[] = [
+    { id: 1, name: 'Coconut' },
+    { id: 2, name: 'Strawberry' }
+];
 
 const filterMock: ICookieFilter = {
     term: 'Term',
@@ -34,21 +38,30 @@ describe('Renders Filter component', () => {
     test('with mock values', () => {
         render(<Filter filter={filterMock} toppings={toppingsMock} handleFilterChange={callback} />);
 
-        // const title = screen.getByText(mock.title);
-        // const description = screen.getByText(mock.description!);
-        // const price = screen.getByText(mock.price / 100);
-        // const rating = screen.getByText(mock.rating!);
+        const term = screen.getByTestId('term');
+        const quickBtnPriceDsc = screen.getByTestId('price-high-low');
+        const quickBtnPriceAsc = screen.getByTestId('price-low-high');
+        const quickBtnRating = screen.getByTestId('rating');
+        const [checkboxCoconut, checkboxStrawberry] = toppingsMock
+            .map((t) => `topping-${t.id}`)
+            .map((selector) => screen.getByTestId(selector));
+        const searchBtn = screen.getByTestId('search');
+        const clearBtn = screen.getByTestId('clear');
 
-        // expect(title).toBeInTheDocument();
-        // expect(title.textContent?.trim()).toBe(mock.title);
+        expect(term).toBeInTheDocument();
+        expect((term as HTMLInputElement).value.trim()).toBe(filterMock.term);
 
-        // expect(description).toBeInTheDocument();
-        // expect(description.textContent?.trim()).toBe(mock.description);
+        expect(quickBtnPriceDsc).toBeInTheDocument();
+        expect(quickBtnPriceAsc).toBeInTheDocument();
+        expect(quickBtnRating).toBeInTheDocument();
 
-        // expect(price).toBeInTheDocument();
-        // expect(price.textContent?.trim()).toBe((mock.price / 100).toString());
+        expect(checkboxCoconut).toBeInTheDocument();
+        expect(checkboxCoconut as HTMLInputElement).toBeChecked();
 
-        // expect(rating).toBeInTheDocument();
-        // expect(rating.textContent?.trim()).toBe(mock.rating?.toString());
+        expect(checkboxStrawberry).toBeInTheDocument();
+        expect(checkboxStrawberry as HTMLInputElement).not.toBeChecked();
+
+        expect(searchBtn).toBeInTheDocument();
+        expect(clearBtn).toBeInTheDocument();
     });
 });

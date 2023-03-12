@@ -20,7 +20,9 @@ export function Filter(props: IFliterProps): JSX.Element {
     const { filter, toppings, handleFilterChange } = props;
     const [form] = Form.useForm();
 
-    const [currentFilter, setCurrentFilter] = useState<ICookieFilter>({} as ICookieFilter);
+    const [currentFilter, setCurrentFilter] = useState<ICookieFilter>({
+        selectedToppings: [] as number[]
+    } as ICookieFilter);
     const [selectedButton, setSelectedButton] = useState<string | null>(null);
 
     useEffect(() => {
@@ -83,27 +85,27 @@ export function Filter(props: IFliterProps): JSX.Element {
     const FilterForm = (
         <Form className="filter" form={form} layout="vertical">
             <Form.Item label="Search" tooltip={{ title: 'Enter someting...', icon: <SearchOutlined /> }}>
-                <Input value={currentFilter.term} onChange={handleInputChange} />
+                <Input value={currentFilter.term} onChange={handleInputChange} data-testid="term" />
             </Form.Item>
 
             <Form.Item label="Quick filter">
                 <Space direction={isMoblie ? 'vertical' : 'horizontal'} style={{ width: '100%' }}>
                     <Button
-                        itemID="price-high-low"
+                        data-testid="price-high-low"
                         type={selectedButton === 'price-high-low' ? 'primary' : 'default'}
                         onClick={() => handleQuickFilter('price-high-low', 'price', 'desc')}
                         style={buttonsWidth}>
                         Price: high to low
                     </Button>
                     <Button
-                        itemID="price-low-high"
+                        data-testid="price-low-high"
                         type={selectedButton === 'price-low-high' ? 'primary' : 'default'}
                         onClick={() => handleQuickFilter('price-low-high', 'price', 'asc')}
                         style={buttonsWidth}>
                         Price: low to high
                     </Button>
                     <Button
-                        itemID="rating"
+                        data-testid="rating"
                         type={selectedButton === 'rating' ? 'primary' : 'default'}
                         onClick={() => handleQuickFilter('rating', 'rating', 'desc')}
                         style={buttonsWidth}>
@@ -118,6 +120,7 @@ export function Filter(props: IFliterProps): JSX.Element {
                         const checked = !!currentFilter.selectedToppings.find((x) => x === topping.id);
                         return (
                             <Checkbox
+                                data-testid={`topping-${topping.id}`}
                                 key={topping.id}
                                 value={topping.id}
                                 checked={checked}
@@ -132,6 +135,7 @@ export function Filter(props: IFliterProps): JSX.Element {
             <Form.Item>
                 <Space direction={isMoblie ? 'vertical' : 'horizontal'} style={{ width: '100%' }}>
                     <Button
+                        data-testid="search"
                         tabIndex={1}
                         style={buttonsWidth}
                         type="primary"
@@ -139,7 +143,11 @@ export function Filter(props: IFliterProps): JSX.Element {
                         onClick={() => handleFilterChange(currentFilter)}>
                         Search
                     </Button>
-                    <Button style={buttonsWidth} icon={<DeleteOutlined />} onClick={() => clearFilter()}>
+                    <Button
+                        data-testid="clear"
+                        style={buttonsWidth}
+                        icon={<DeleteOutlined />}
+                        onClick={() => clearFilter()}>
                         Clear
                     </Button>
                 </Space>

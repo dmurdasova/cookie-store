@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Cookie } from './Cookie';
@@ -26,10 +25,11 @@ describe('Renders Cookie component', () => {
 
     test('with mock values', () => {
         render(<Cookie item={mock} />);
-        const title = screen.getByText(mock.title);
-        const description = screen.getByText(mock.description!);
-        const price = screen.getByText(mock.price / 100);
-        const rating = screen.getByText(mock.rating!);
+
+        const title = screen.getByTestId('title');
+        const description = screen.getByTestId('description');
+        const price = screen.getByTestId('price');
+        const rating = screen.getByTestId('rating');
 
         expect(title).toBeInTheDocument();
         expect(title.textContent?.trim()).toBe(mock.title);
@@ -38,9 +38,9 @@ describe('Renders Cookie component', () => {
         expect(description.textContent?.trim()).toBe(mock.description);
 
         expect(price).toBeInTheDocument();
-        expect(price.textContent?.trim()).toBe((mock.price / 100).toString());
+        expect(price.textContent?.trim()).toBe(`Price: ${mock.price / 100}`);
 
         expect(rating).toBeInTheDocument();
-        expect(rating.textContent?.trim()).toBe(mock.rating?.toString());
+        expect(rating.textContent?.trim()).toBe(`Rating: ${mock.rating}`);
     });
 });
